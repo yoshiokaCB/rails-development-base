@@ -14,3 +14,13 @@ $ docker-compose build
 $ docker-compose run web rails new . --force -d postgresql
 ```
 
+## etc
+
+```
+$ docker-compose run web rails g scaffold tasks name:string description:text
+$ docker-compose run web rails db:create
+$ docker-compose run web rails db:migrate
+
+# start app
+$ docker-compose run --rm --service-ports web
+```
