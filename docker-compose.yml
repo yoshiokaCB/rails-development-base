@@ -8,16 +8,18 @@ services:
     environment:
       - "POSTGRES_USER=postgres"
       - "POSTGRES_PASSWORD=password1234"
-  web:
+  app:
     build: .
     ports:
       - "3000:3000"
+      - "8080:3000"
     environment:
       - "DATABASE_HOST=db"
       - "DATABASE_NAME=dbname"
       - "DATABASE_PORT=5432"
       - "DATABASE_USERNAME=postgres"
       - "DATABASE_PASSWORD=password1234"
+      - "DATABASE_ENCODING=utf8"
     depends_on:
       - db
     command: bundle exec rails s -p 3000 -b 0.0.0.0
