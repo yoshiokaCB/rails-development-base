@@ -13,7 +13,7 @@ RUN set -x && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*;
 
-COPY./Gemfile /tmp
+COPY ./Gemfile /tmp
 RUN cd /tmp && bundle install
 
 WORKDIR /myapp
