@@ -11,16 +11,53 @@ Build Rails + Postgresql development environment using Docker Compose
 $ git clone https://github.com/yoshiokaCB/rails-development-base.git ./[app-name]
 $ cd [app-name]
 $ docker-compose build
-$ docker-compose run web rails new . --force -d postgresql
+$ docker-compose run --rm app rails new . --force -d postgresql
 ```
 
-## etc
+## Example
 
 ```
-$ docker-compose run web rails g scaffold tasks name:string description:text
-$ docker-compose run web rails db:create
-$ docker-compose run web rails db:migrate
+$ docker-compose run --rm app rails g scaffold tasks name:string description:text
+$ docker-compose run --rm app rails db:create
+$ docker-compose run --rm app rails db:migrate
+```
 
-# start app
-$ docker-compose run --rm --service-ports web
+### Set Config
+
+```
+$ vi config/database.yml
+```
+
+```
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV["DATABASE_HOST"] %>
+  database: <%= ENV["DATABASE_NAME"] %>
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
+  encoding: <%= ENV['DATABASE_ENCODING'] %>
+  template: template0
+  collation: C
+  ctype: C
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  database: <%= ENV["DATABASE_NAME"] %>_test
+
+production:
+  <<: *default
+
+```
+
+
+### Start app
+
+```
+$ docker-compose run --rm --service-ports app
 ```
