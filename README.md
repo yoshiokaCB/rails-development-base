@@ -16,12 +16,6 @@ $ docker-compose run --rm app rails new . --force -d postgresql
 
 ## Example
 
-```
-$ docker-compose run --rm app rails g scaffold tasks name:string description:text
-$ docker-compose run --rm app rails db:create
-$ docker-compose run --rm app rails db:migrate
-```
-
 ### Set Config
 
 ```
@@ -54,6 +48,13 @@ production:
   <<: *default
 
 ```
+
+```
+$ docker-compose run --rm app rails g scaffold tasks name:string description:text
+$ docker-compose run --rm app rails db:create
+$ docker-compose run --rm app rails db:migrate
+```
+
 
 
 ### Start app
