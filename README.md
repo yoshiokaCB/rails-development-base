@@ -12,6 +12,9 @@ $ git clone https://github.com/yoshiokaCB/rails-development-base.git ./[app-name
 $ cd [app-name]
 $ docker-compose build
 $ docker-compose run --rm app rails new . --force -d postgresql
+
+# use react
+$ docker-compose run --rm app rails new . --webpack=react --force -d postgresql
 ```
 
 ## Example
