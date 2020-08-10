@@ -1,4 +1,4 @@
-FROM ruby:2.6.3-slim-stretch
+FROM ruby:2.7.1-slim-buster
 ENV TZ="Asia/Tokyo" \
     LANG="ja_JP.UTF-8" \
     LC_CTYPE="ja_JP.UTF-8"
@@ -7,7 +7,7 @@ RUN set -x && \
     : "必要ライブラリーのインストール" && \
     apt-get update && \
     apt-get install -y \
-    build-essential libpq-dev curl \
+    build-essential libpq-dev curl default-libmysqlclient-dev \
     imagemagick libmagick++-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*;

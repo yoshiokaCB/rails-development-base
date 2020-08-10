@@ -1,25 +1,31 @@
 version: "3"
 
 services:
+  # db:
+  #   image: postgres:11.5-alpine
+  #   ports:
+  #     - "5432:5432"
+  #   environment:
+  #     - "POSTGRES_USER=postgres"
+  #     - "POSTGRES_PASSWORD=password1234"
   db:
-    image: postgres:11.5-alpine
-    ports:
-      - "5432:5432"
+    image: mysql:5.7
     environment:
-      - "POSTGRES_USER=postgres"
-      - "POSTGRES_PASSWORD=password1234"
+      MYSQL_ROOT_PASSWORD: password1234
+      MYSQL_DATABASE: root
+    # ports:
+    #   - "3306:3306"
   app:
     build: .
     ports:
-      - "3000:3000"
       - "8080:3000"
     environment:
       - "DATABASE_HOST=db"
-      - "DATABASE_NAME=dbname"
-      - "DATABASE_PORT=5432"
-      - "DATABASE_USER=postgres"
+      - "DATABASE_NAME=rootdb"
+      - "DATABASE_PORT=3306"
+      - "DATABASE_USER=root"
       - "DATABASE_PASSWORD=password1234"
-      - "DATABASE_ENCODING=utf8"
+      - "DATABASE_ENCODING=utf8mb4"
       - "RAILS_ENV=development"
     depends_on:
       - db
