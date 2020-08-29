@@ -27,7 +27,7 @@ $ vi config/database.yml
 
 ```
 default: &default
-  adapter: postgresql
+  adapter: mysql2
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: <%= ENV["DATABASE_HOST"] %>
   database: <%= ENV["DATABASE_NAME"] %>
